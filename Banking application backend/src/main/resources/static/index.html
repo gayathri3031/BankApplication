@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Banking Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        .api-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .api-section h3 {
+            color: #34495e;
+            margin-top: 0;
+        }
+        .endpoint {
+            background-color: #ecf0f1;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .method {
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        .get { background-color: #3498db; color: white; }
+        .post { background-color: #27ae60; color: white; }
+        .put { background-color: #f39c12; color: white; }
+        .delete { background-color: #e74c3c; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Banking Application API</h1>
+        <p>Welcome to the Banking Application! This application provides REST APIs for managing customers, accounts, and transactions using Java 21, Spring Boot 3.2.4, and H2 database.</p>
+        
+        <div class="api-section">
+            <h3>Customer Management APIs</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/customers - Get all customers</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/customers - Create a new customer</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/customers/{id} - Get customer by ID</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/customers/{id} - Update customer</div>
+            <div class="endpoint"><span class="method delete">DELETE</span>/api/customers/{id} - Delete customer</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/customers/search?name={name} - Search customers by name</div>
+        </div>
+
+        <div class="api-section">
+            <h3>Account Management APIs</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/accounts - Get all accounts</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/accounts - Create a new account</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/accounts/{id} - Get account by ID</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/accounts/customer/{customerId} - Get accounts by customer</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/accounts/{id}/balance - Get account balance</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/accounts/{id}/activate - Activate account</div>
+            <div class="endpoint"><span class="method put">PUT</span>/api/accounts/{id}/deactivate - Deactivate account</div>
+        </div>
+
+        <div class="api-section">
+            <h3>Transaction APIs</h3>
+            <div class="endpoint"><span class="method get">GET</span>/api/transactions - Get all transactions</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/transactions/deposit - Make a deposit</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/transactions/withdraw - Make a withdrawal</div>
+            <div class="endpoint"><span class="method post">POST</span>/api/transactions/transfer - Transfer money between accounts</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/transactions/account/{accountId} - Get transactions by account</div>
+            <div class="endpoint"><span class="method get">GET</span>/api/transactions/customer/{customerId} - Get transactions by customer</div>
+        </div>
+        
+        <div class="api-section">
+            <h3>API Documentation</h3>
+            <p>Interactive API documentation is available via Swagger UI:</p>
+            <div class="endpoint"><a href="/swagger-ui.html" target="_blank">/swagger-ui.html</a></div>
+            <p>You can test all API endpoints directly from the Swagger interface.</p>
+            </div>
+
+        <div class="api-section">
+            <h3>Authentication</h3>
+            <p>The application uses HTTP Basic Authentication. Default users:</p>
+            <ul>
+                <li><strong>Admin:</strong> username=<code>admin@bank.com</code>, password=<code>admin</code> (ADMIN + CUSTOMER roles)</li>
+                <li><strong>Customer:</strong> username=<code>customer@bank.com</code>, password=<code>password</code> (CUSTOMER role)</li>
+                <li><strong>Teller:</strong> username=<code>teller@bank.com</code>, password=<code>teller</code> (CUSTOMER role)</li>
+            </ul>
+        </div>
+        
+        <div class="api-section">
+            <h3>Database Console</h3>
+            <p>For development purposes, you can access the H2 database console at:</p>
+            <div class="endpoint"><a href="/h2-console" target="_blank">/h2-console</a></div>
+            <p><strong>Database URL:</strong> jdbc:h2:mem:bankdb<br>
+               <strong>Username:</strong> sa<br>
+               <strong>Password:</strong> password</p>
+        </div>
+        
+        <div class="api-section">
+            <h3>Features</h3>
+            <ul>
+                <li>✅ Java 21 compatible</li>
+                <li>✅ Spring Boot 3.2.4</li>
+                <li>✅ Spring Security with Basic Authentication</li>
+                <li>✅ Role-based access control (ADMIN, CUSTOMER)</li>
+                <li>✅ OpenAPI 3 / Swagger UI documentation</li>
+                <li>✅ H2 in-memory database</li>
+                <li>✅ JPA/Hibernate for data persistence</li>
+                <li>✅ RESTful API endpoints</li>
+                <li>✅ Jakarta EE validation and error handling</li>
+                <li>✅ Transaction management</li>
+                <li>✅ Account balance management</li>
+                <li>✅ Transfer functionality</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
