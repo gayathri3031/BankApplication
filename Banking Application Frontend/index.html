@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Application - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="bank-logo">
+                <i class="fas fa-university"></i>
+                <h1>SecureBank</h1>
+            </div>
+            
+            <div class="form-container">
+                <h2>Welcome Back</h2>
+                <p>Please sign in to your account</p>
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="demo-accounts">
+                    <h4>Demo Accounts</h4>
+                    <div class="demo-account-info">
+                        <p><strong>Admin:</strong> <span>admin@bank.com / admin</span></p>
+                        <p><strong>Customer:</strong> <span>customer@bank.com / password</span></p>
+                    </div>
+                    <div class="demo-buttons">
+                        <button type="button" class="btn-secondary" onclick="fillCredentials('admin@bank.com', 'admin')">Use Admin</button>
+                        <button type="button" class="btn-secondary" onclick="fillCredentials('customer@bank.com', 'password')">Use Customer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-panel">
+            <h2>Banking Features</h2>
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h3>Customer Management</h3>
+                <p>Create and manage customer profiles</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-credit-card"></i>
+                <h3>Account Management</h3>
+                <p>Open accounts and manage balances</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Transactions</h3>
+                <p>Deposits, withdrawals, and transfers</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h3>Reports & Analytics</h3>
+                <p>Transaction history and account reports</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="errorMessage" class="error-message"></div>
+    <div id="loadingSpinner" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Authenticating...</p>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
