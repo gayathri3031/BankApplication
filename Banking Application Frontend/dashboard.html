@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Dashboard - SecureBank</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body data-page="dashboard">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-university"></i>
+            <span>SecureBank</span>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="#" onclick="showSection('dashboard')" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#" onclick="showSection('customers')"><i class="fas fa-users"></i> Customers</a></li>
+            <li><a href="#" onclick="showSection('accounts')"><i class="fas fa-credit-card"></i> Accounts</a></li>
+            <li><a href="#" onclick="showSection('transactions')"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+        </ul>
+        
+        <div class="nav-user">
+            <span id="currentUser">Welcome, User</span>
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <h1>Dashboard Overview</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3 id="totalCustomers">0</h3>
+                        <p>Total Customers</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-credit-card"></i>
+                    <div class="stat-info">
+                        <h3 id="totalAccounts">0</h3>
+                        <p>Active Accounts</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div class="stat-info">
+                        <h3 id="totalTransactions">0</h3>
+                        <p>Recent Transactions</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div class="stat-info">
+                        <h3 id="totalBalance">$0</h3>
+                        <p>Total Balance</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-actions">
+                <h2>Quick Actions</h2>
+                <div class="action-grid">
+                    <button class="action-btn admin-only" onclick="showSection('customers'); showAddCustomerForm()">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Customer</span>
+                    </button>
+                    <button class="action-btn admin-only" onclick="showSection('accounts'); showCreateAccountForm()">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Create Account</span>
+                    </button>
+                    <button class="action-btn" onclick="showSection('transactions'); showTransactionForm('deposit')">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>Make Deposit</span>
+                    </button>
+                    <button class="action-btn" onclick="showSection('transactions'); showTransactionForm('transfer')">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Transfer Money</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customers Section -->
+        <section id="customers" class="content-section">
+            <div class="filter-controls">
+                <h3>Customer Management</h3>
+                <div class="filters">
+                    <input type="text" id="customerSearch" placeholder="Search customers...">
+                    <button class="primary-btn admin-only" onclick="showAddCustomerForm()">Add Customer</button>
+                </div>      
+            <div id="customersTable" class="table-container"></div>
+        </section>
+
+        <!-- Accounts Section -->
+        <section id="accounts" class="content-section">
+            <div class="filter-controls">
+                <h3>Account Management</h3>
+                <div class="filters">
+                    <select id="accountTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="SAVINGS">Savings</option>
+                        <option value="CHECKING">Checking</option>
+                        <option value="BUSINESS">Business</option>
+                    </select>
+                    <select id="accountStatusFilter">
+                        <option value="">All Status</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <button class="primary-btn admin-only" onclick="showCreateAccountForm()">Create Account</button>
+                </div>
+            </div>
+            <div id="accountsTable" class="table-container"></div>
+        </section>
+
+        <!-- Transactions Section -->
+        <section id="transactions" class="content-section">
+            <div class="filter-controls">
+                <h3>Transaction Management</h3>
+                <div class="filters">
+                    <input type="date" id="dateFrom" placeholder="dd-mm-yyyy">
+                    <input type="date" id="dateTo" placeholder="dd-mm-yyyy">
+                    <select id="transactionTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="DEPOSIT">Deposit</option>
+                        <option value="WITHDRAWAL">Withdrawal</option>
+                        <option value="TRANSFER">Transfer</option>
+                    </select>
+                    <button class="primary-btn admin-only" onclick="showTransactionForm('deposit')">Deposit</button>
+                    <button class="primary-btn admin-only" onclick="showTransactionForm('withdraw')">Withdraw</button>
+                    <button class="primary-btn" onclick="showTransactionForm('transfer')">Transfer</button>
+                </div>
+            </div>
+            <div id="transactionsTable" class="table-container"></div>
+        </section>
+    </main>
+
+    <!-- Modal Dialogs -->
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
